@@ -1,0 +1,70 @@
+openapi: 3.0.0
+info:
+  title: API de Postagens - Eduardo
+  description: API desenvolvida para o gerenciamento de postagens futuras.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Servidor de Desenvolvimento Local
+paths:
+  /posts:
+    get:
+      summary: Listar todas as postagens
+      description: Retorna uma lista de todas as postagens cadastradas.
+      responses:
+        '200':
+          description: Sucesso ao retornar a lista.
+    post:
+      summary: Criar uma nova postagem
+      description: Envia dados para criar uma nova postagem no sistema.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                titulo:
+                  type: string
+                conteudo:
+                  type: string
+      responses:
+        '201':
+          description: Postagem criada com sucesso.
+
+  /posts/{id}:
+    put:
+      summary: Atualizar uma postagem existente
+      description: Altera os dados de uma postagem específica baseada no ID.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                titulo:
+                  type: string
+                conteudo:
+                  type: string
+      responses:
+        '200':
+          description: Postagem atualizada com sucesso.
+    delete:
+      summary: Excluir uma postagem
+      description: Remove uma postagem do sistema usando o ID informado.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Postagem excluída com sucesso.
